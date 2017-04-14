@@ -167,6 +167,7 @@ debug/moc_enginethread.cpp: C:/Qt/5.8/mingw53_32/include/QtCore/QThread \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qvarlengtharray.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qcontainerfwd.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qobject_impl.h \
+		C:/Qt/5.8/mingw53_32/include/QtCore/QEvent \
 		../thread/enginethread.h \
 		debug/moc_predefs.h \
 		C:/Qt/5.8/mingw53_32/bin/moc.exe
@@ -333,7 +334,9 @@ debug/main.o: ../thread/main.cpp C:/Qt/5.8/mingw53_32/include/QtGui/QGuiApplicat
 		C:/Qt/5.8/mingw53_32/include/QtCore/QThread \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qthread.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/QDebug \
-		../thread/enginethread.h
+		../thread/enginethread.h \
+		C:/Qt/5.8/mingw53_32/include/QtCore/QEvent \
+		../thread/datathread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\thread\main.cpp
 
 debug/enginethread.o: ../thread/enginethread.cpp ../thread/enginethread.h \
@@ -386,6 +389,7 @@ debug/enginethread.o: ../thread/enginethread.cpp ../thread/enginethread.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qvarlengtharray.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qcontainerfwd.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qobject_impl.h \
+		C:/Qt/5.8/mingw53_32/include/QtCore/QEvent \
 		C:/Qt/5.8/mingw53_32/include/QtCore/QDebug \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qdebug.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qhash.h \
@@ -404,7 +408,9 @@ debug/enginethread.o: ../thread/enginethread.cpp ../thread/enginethread.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/QTimer \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qtimer.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qbasictimer.h \
-		C:/Qt/5.8/mingw53_32/include/QtCore/QEvent
+		C:/Qt/5.8/mingw53_32/include/QtCore/QCoreApplication \
+		C:/Qt/5.8/mingw53_32/include/QtCore/qcoreapplication.h \
+		C:/Qt/5.8/mingw53_32/include/QtCore/qeventloop.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\enginethread.o ..\thread\enginethread.cpp
 
 debug/datathread.o: ../thread/datathread.cpp ../thread/datathread.h \
@@ -457,6 +463,8 @@ debug/datathread.o: ../thread/datathread.cpp ../thread/datathread.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qvarlengtharray.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qcontainerfwd.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qobject_impl.h \
+		../thread/enginethread.h \
+		C:/Qt/5.8/mingw53_32/include/QtCore/QEvent \
 		C:/Qt/5.8/mingw53_32/include/QtCore/QDebug \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qdebug.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qhash.h \
@@ -474,7 +482,13 @@ debug/datathread.o: ../thread/datathread.cpp ../thread/datathread.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qsharedpointer_impl.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/QTimer \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qtimer.h \
-		C:/Qt/5.8/mingw53_32/include/QtCore/qbasictimer.h
+		C:/Qt/5.8/mingw53_32/include/QtCore/qbasictimer.h \
+		C:/Qt/5.8/mingw53_32/include/QtCore/QMutex \
+		C:/Qt/5.8/mingw53_32/include/QtCore/QWaitCondition \
+		C:/Qt/5.8/mingw53_32/include/QtCore/qwaitcondition.h \
+		C:/Qt/5.8/mingw53_32/include/QtCore/QCoreApplication \
+		C:/Qt/5.8/mingw53_32/include/QtCore/qcoreapplication.h \
+		C:/Qt/5.8/mingw53_32/include/QtCore/qeventloop.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\datathread.o ..\thread\datathread.cpp
 
 debug/qrc_qml.o: debug/qrc_qml.cpp 

@@ -20,8 +20,8 @@ void EngineThread::run()
     for (;;)
     {
         //5초마다 특정 시그널 날림
-        qDebug() << Q_FUNC_INFO << QThread::currentThread();
-        QThread::currentThread()->msleep(500);
+//        qDebug() << Q_FUNC_INFO << QThread::currentThread();
+        QThread::currentThread()->msleep(1000);
         if (parent() != Q_NULLPTR)
         {
             QCoreApplication::postEvent(this->parent(), new QEvent(INIT));
