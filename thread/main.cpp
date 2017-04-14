@@ -5,6 +5,7 @@
 
 #include "enginethread.h"
 #include "datathread.h"
+#include "listmodelcontrol.h"
     /*
      * 메인 최소 Thread 3
      * Thread1 : Main Thread , GUI Update 하는 Thread
@@ -21,24 +22,33 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+    ListModelControl::instance()->setRootContext(engine.rootContext());
+
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
     QThread::currentThread()->setObjectName("Main Thread"); // Gui를 담당 하는 Thread
 
 
+//    QThread* parentThread = new QThread;
+//    parentThread->start();
 
     QThread * subThread1 = new QThread;
     QThread * subThread2 = new QThread;
+
+//    subThread1->moveToThread(parentThread);
+//    subThread2->moveToThread(parentThread);
+
     subThread1->setObjectName("sub 1 Thread"); // manager Thread
     subThread2->setObjectName("sub 2 Thread"); // manager Thread
 
-    dataThread = new DataThread;
-    engineThread = new EngineThread;
+    dataThread = DataThread::instance();
+    engineThread = EngineThread::instance();
 
     engineThread->setThread(dataThread);
+    dataThread->setThread(engineThread);
 
-//    dataThread->moveToThread(subThread1);
-//    engineThread->moveToThread(subThread2);
+    dataThread->moveToThread(subThread1);
+    engineThread->moveToThread(subThread2);
 
     QObject::connect(subThread1, SIGNAL(started()), dataThread, SLOT(run()));
     QObject::connect(subThread2, SIGNAL(started()), engineThread, SLOT(run()));

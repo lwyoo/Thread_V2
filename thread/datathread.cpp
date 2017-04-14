@@ -1,5 +1,6 @@
 #include "datathread.h"
 #include "enginethread.h"
+#include "listmodelcontrol.h"
 #include <QDebug>
 #include <QTimer>
 #include <QEvent>
@@ -11,15 +12,30 @@
 /*
  * Egine Thread 에서 오는 시그널을 가지고 모델리 / parsing 하는 class
  */
-
+DataThread* dataThreadInstance = NULL;
 QWaitCondition wc;
 QMutex mutex;
 
 DataThread::DataThread(QObject *parent)
     : QObject (parent)
     , state(INIT)
+    , mList(new TestListModel)
 {
     setObjectName("Data Thread");
+}
+
+DataThread *DataThread::instance()
+{
+    if (dataThreadInstance == NULL)
+    {
+        qDebug() << "dldyddn new DataThread";
+        dataThreadInstance = new DataThread;
+    }
+    else
+    {
+        qDebug() << "dldyddn return DataThread";
+    }
+    return dataThreadInstance;
 }
 
 void DataThread::run()
@@ -33,18 +49,9 @@ void DataThread::run()
         }
         else if (state == WAIT)
         {
-            qDebug() << "[state ] wait";
-            qDebug() << "[state ] wait lock";
-//            mutex.lock();
-            qDebug() << "[state ] wait wait";
-//            wc.wait(&mutex);
-            qDebug() << "[state ] wait wake!!!!!";
-            // Event 가 오면 모델링 시작 그전까지는 그냥 대기
             state = WORK;
             dataModeling();
             state = WAIT;
-//            mutex.unlock();
-            qDebug() << "[state ] wait unLock";
         }
         else if(state == WORK)
         {
@@ -56,6 +63,7 @@ void DataThread::run()
 
 bool DataThread::event(QEvent *event)
 {
+    qDebug() << Q_FUNC_INFO  ;
     switch (int (event->type()))
     {
     case EngineThread::INIT:
@@ -77,16 +85,34 @@ bool DataThread::event(QEvent *event)
 
 void DataThread::dataModeling()
 {
-    qDebug() << "start modeling";
-    qDebug() << Q_FUNC_INFO << QThread::currentThread();
-    int value = 0;
-    for (int i = 0; i<100000; i++)
+    //데이터 가지고 와서 파싱하기
+    qDebug() << Q_FUNC_INFO ;
+
+    if (mData == NULL)
     {
-        for (int j = 0; j<10000; j++)
-        {
-            value++;
-        }
+        qDebug() << Q_FUNC_INFO << "data NULL";
     }
-    qDebug() << "end modeling";
+    else
+    {
+        qDebug() << Q_FUNC_INFO << "get Data";
+        mList = mData->getData();
+        qDebug() << Q_FUNC_INFO  <<  "count : " << mList->rowCount();
+//        emit testSignal();
+        QCoreApplication::postEvent(ListModelControl::instance(), new QEvent(EngineThread::GUI_UPDATE));
+        //postevent 날리기
+    }
+
+}
+
+void DataThread::setThread(EngineThread *test)
+{
+    qDebug() << Q_FUNC_INFO  ;
+    mData = test;
+}
+
+TestListModel *DataThread::getData()
+{
+    qDebug() << Q_FUNC_INFO  <<  "count : " << mList->rowCount();
+    return mList;
 }
 

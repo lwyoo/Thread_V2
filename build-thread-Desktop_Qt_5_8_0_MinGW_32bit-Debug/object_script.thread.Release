@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\enginethread.o
+./release\datathread.o
+./release\testlistelement.o
+./release\testlistmodel.o
+./release\listmodelcontrol.o
+./release\qrc_qml.o
+./release\moc_enginethread.o
+./release\moc_datathread.o
+./release\moc_listmodelcontrol.o
+);

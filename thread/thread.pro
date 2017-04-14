@@ -4,7 +4,10 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     enginethread.cpp \
-    datathread.cpp
+    datathread.cpp \
+    testlistelement.cpp \
+    testlistmodel.cpp \
+    listmodelcontrol.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,4 +35,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     enginethread.h \
-    datathread.h
+    datathread.h \
+    testlistelement.h \
+    testlistmodel.h \
+    listmodelcontrol.h
