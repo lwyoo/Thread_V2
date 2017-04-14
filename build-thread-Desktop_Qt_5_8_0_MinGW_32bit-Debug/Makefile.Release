@@ -332,6 +332,7 @@ release/main.o: ../thread/main.cpp C:/Qt/5.8/mingw53_32/include/QtGui/QGuiApplic
 		C:/Qt/5.8/mingw53_32/include/QtQml/qqmldebug.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/QThread \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qthread.h \
+		C:/Qt/5.8/mingw53_32/include/QtCore/QDebug \
 		../thread/enginethread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\thread\main.cpp
 
@@ -402,7 +403,8 @@ release/enginethread.o: ../thread/enginethread.cpp ../thread/enginethread.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qsharedpointer_impl.h \
 		C:/Qt/5.8/mingw53_32/include/QtCore/QTimer \
 		C:/Qt/5.8/mingw53_32/include/QtCore/qtimer.h \
-		C:/Qt/5.8/mingw53_32/include/QtCore/qbasictimer.h
+		C:/Qt/5.8/mingw53_32/include/QtCore/qbasictimer.h \
+		C:/Qt/5.8/mingw53_32/include/QtCore/QEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\enginethread.o ..\thread\enginethread.cpp
 
 release/datathread.o: ../thread/datathread.cpp ../thread/datathread.h \
