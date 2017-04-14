@@ -25,32 +25,26 @@ int main(int argc, char *argv[])
 
     QThread::currentThread()->setObjectName("Main Thread"); // Gui를 담당 하는 Thread
 
-    QThread * subThread = new QThread;
-    subThread->setObjectName("sub Thread"); // manager Thread
-    subThread->start();
+
+
+    QThread * subThread1 = new QThread;
+    QThread * subThread2 = new QThread;
+    subThread1->setObjectName("sub 1 Thread"); // manager Thread
+    subThread2->setObjectName("sub 2 Thread"); // manager Thread
 
     dataThread = new DataThread;
-    engineThread = new EngineThread(dataThread);
-    engineThread->moveToThread(subThread);
+    engineThread = new EngineThread;
 
+    engineThread->setThread(dataThread);
 
-    engineThread->moveToThread(subThread);
+//    dataThread->moveToThread(subThread1);
+//    engineThread->moveToThread(subThread2);
 
+    QObject::connect(subThread1, SIGNAL(started()), dataThread, SLOT(run()));
+    QObject::connect(subThread2, SIGNAL(started()), engineThread, SLOT(run()));
 
-    engineThread->start(); // thread start  , 시간마다 이벤트 발생
-    dataThread->start(); // thread start , engine Thread 에서 이벤트가 오면 받아서 모델링 하는 Thread
-
-
-
-
-
-//    for (;;)
-//    {
-//        qDebug() << QThread::currentThread() << "@@@@@@@@@@@@";
-//        QThread::currentThread()->msleep(5000);
-//    }
-
-
+    subThread1->start();
+    subThread2->start();
 
     return app.exec();
 

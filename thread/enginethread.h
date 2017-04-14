@@ -3,21 +3,22 @@
 
 #include <QThread>
 #include <QEvent>
-
+#include "datathread.h"
 class QTimer;
-class EngineThread : public QThread
+class EngineThread : public QObject
 {
     Q_OBJECT
 public:
     static const QEvent::Type INIT = QEvent::Type(QEvent::User + 1);
     EngineThread(QObject* parent = 0);
-
-    void run();
+    void setThread(QObject * test);
 //    bool event(QEvent * e);
-signals:
-    void request();
+//signals:
+//    void request();
 public slots:
+    void run();
 private:
+    QObject*mData;
 };
 
 #endif // ENGINETHREAD_H

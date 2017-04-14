@@ -2,35 +2,42 @@
 #include <QDebug>
 #include <QTimer>
 #include <QCoreApplication>
+#include <QObject>
+#include "datathread.h"
+
 /*
  * 주기적으로 signal 을 날리는 class
  * Engine 이라는 가정 하에
  */
 
 EngineThread::EngineThread(QObject* parent)
-    :QThread(parent)
+    :QObject(parent)
 {
     setObjectName("Engine Thread");
     qDebug() << Q_FUNC_INFO  << QThread::currentThread();
-//    connect(this , SIGNAL(request()) , this , SLOT (response()));
+}
+
+void EngineThread::setThread(QObject *test)
+{
+    mData = test;
 }
 
 void EngineThread::run()
 {
-    for (;;)
-    {
-        //5초마다 특정 시그널 날림
-//        qDebug() << Q_FUNC_INFO << QThread::currentThread();
-        QThread::currentThread()->msleep(1000);
-        if (parent() != Q_NULLPTR)
+//    for (;;)
+//    {
+        qDebug() << Q_FUNC_INFO  << QThread::currentThread();
+//        QThread::currentThread()->msleep(5000);
+        int value = 0;
+        for (int i = 0; i<1000; i++)
         {
-            QCoreApplication::postEvent(this->parent(), new QEvent(INIT));
+            for (int j = 0; j<1000; j++)
+            {
+                value++;
+            }
         }
-        else
-        {
-            qDebug() << Q_FUNC_INFO << "parent not found";
-        }
-//        emit request();
-    }
+        qDebug() << Q_FUNC_INFO  << "post event call";
+        qApp->postEvent(mData, new QEvent(INIT));
+//    }
 }
 

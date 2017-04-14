@@ -2,13 +2,12 @@
 #define DATATHREAD_H
 
 #include <QThread>
-class DataThread : public QThread
+class DataThread : public QObject
 {
     Q_OBJECT
 public:
     DataThread(QObject * parent = 0);
-    void run();
-    bool event(QEvent *event);
+    bool event(QEvent *event) override;
     virtual void dataModeling();
 
     enum State{
@@ -18,6 +17,9 @@ public:
     };
 private:
     State state ;
+public slots:
+    void run();
+
 };
 
 #endif // DATATHREAD_H

@@ -7,6 +7,7 @@ ApplicationWindow {
     width: 640
     height: 480
     title: qsTr("Hello World")
+    property int testValue : 0
 
     SwipeView {
         id: swipeView
@@ -32,6 +33,33 @@ ApplicationWindow {
         }
         TabButton {
             text: qsTr("Second")
+        }
+    }
+
+    Rectangle{
+        width: 100
+        height: 100
+        color: "blue"
+        x: 500
+        y: 300
+        transform: Rotation {
+            origin.x: 50;
+            origin.y: 50;
+            angle: testValue
+        }
+    }
+
+    Timer
+    {
+        interval: 10
+        running : true
+        repeat: true
+        onTriggered:{
+            testValue++
+            if (testValue == 359)
+            {
+                testValue = 0
+            }
         }
     }
 }

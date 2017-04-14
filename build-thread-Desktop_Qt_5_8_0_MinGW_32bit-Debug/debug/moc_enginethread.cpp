@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_EngineThread_t {
     QByteArrayData data[3];
-    char stringdata0[22];
+    char stringdata0[18];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,11 +32,11 @@ struct qt_meta_stringdata_EngineThread_t {
 static const qt_meta_stringdata_EngineThread_t qt_meta_stringdata_EngineThread = {
     {
 QT_MOC_LITERAL(0, 0, 12), // "EngineThread"
-QT_MOC_LITERAL(1, 13, 7), // "request"
-QT_MOC_LITERAL(2, 21, 0) // ""
+QT_MOC_LITERAL(1, 13, 3), // "run"
+QT_MOC_LITERAL(2, 17, 0) // ""
 
     },
-    "EngineThread\0request\0"
+    "EngineThread\0run\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -51,12 +51,12 @@ static const uint qt_meta_data_EngineThread[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       0,       // signalCount
 
- // signals: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x06 /* Public */,
+ // slots: name, argc, parameters, tag, flags
+       1,    0,   19,    2, 0x0a /* Public */,
 
- // signals: parameters
+ // slots: parameters
     QMetaType::Void,
 
        0        // eod
@@ -68,25 +68,15 @@ void EngineThread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         EngineThread *_t = static_cast<EngineThread *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->request(); break;
+        case 0: _t->run(); break;
         default: ;
-        }
-    } else if (_c == QMetaObject::IndexOfMethod) {
-        int *result = reinterpret_cast<int *>(_a[0]);
-        void **func = reinterpret_cast<void **>(_a[1]);
-        {
-            typedef void (EngineThread::*_t)();
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&EngineThread::request)) {
-                *result = 0;
-                return;
-            }
         }
     }
     Q_UNUSED(_a);
 }
 
 const QMetaObject EngineThread::staticMetaObject = {
-    { &QThread::staticMetaObject, qt_meta_stringdata_EngineThread.data,
+    { &QObject::staticMetaObject, qt_meta_stringdata_EngineThread.data,
       qt_meta_data_EngineThread,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
@@ -101,12 +91,12 @@ void *EngineThread::qt_metacast(const char *_clname)
     if (!_clname) return Q_NULLPTR;
     if (!strcmp(_clname, qt_meta_stringdata_EngineThread.stringdata0))
         return static_cast<void*>(const_cast< EngineThread*>(this));
-    return QThread::qt_metacast(_clname);
+    return QObject::qt_metacast(_clname);
 }
 
 int EngineThread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QThread::qt_metacall(_c, _id, _a);
+    _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
@@ -119,12 +109,6 @@ int EngineThread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 1;
     }
     return _id;
-}
-
-// SIGNAL 0
-void EngineThread::request()
-{
-    QMetaObject::activate(this, &staticMetaObject, 0, Q_NULLPTR);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE
