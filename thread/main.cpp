@@ -51,13 +51,13 @@ int main(int argc, char *argv[])
     engineThread->moveToThread(subThread2);
 
     QObject::connect(subThread1, SIGNAL(started()), dataThread, SLOT(run()));
-    QObject::connect(subThread2, SIGNAL(started()), engineThread, SLOT(run()));
+//    QObject::connect(subThread2, SIGNAL(started()), engineThread, SLOT(run()));
 
     subThread1->start();
     subThread2->start();
-
     return app.exec();
 
     engineThread->deleteLater();
     dataThread->deleteLater();
+
 }

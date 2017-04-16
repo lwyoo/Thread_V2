@@ -28,12 +28,10 @@ DataThread *DataThread::instance()
 {
     if (dataThreadInstance == NULL)
     {
-        qDebug() << "dldyddn new DataThread";
         dataThreadInstance = new DataThread;
     }
     else
     {
-        qDebug() << "dldyddn return DataThread";
     }
     return dataThreadInstance;
 }

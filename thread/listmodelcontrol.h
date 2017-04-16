@@ -34,9 +34,9 @@ public:
 
     bool event(QEvent *e);
 
+    TestListModel * mList;
 
 private:
-    TestListModel * mList;
     QQmlEngine* mQmlEngine;
 //    TestThread* mThread;
 

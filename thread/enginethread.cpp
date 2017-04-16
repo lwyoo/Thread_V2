@@ -18,6 +18,10 @@ EngineThread::EngineThread(QObject* parent)
     qDebug() << Q_FUNC_INFO  << QThread::currentThread();
     mData = NULL;
     mList = new TestListModel;
+
+    QTimer * timer = new QTimer(this);
+    connect(timer,SIGNAL(timeout()) , this , SLOT (run()));
+    timer->start(1000);
 }
 
 EngineThread *EngineThread::instance()
@@ -37,7 +41,6 @@ void EngineThread::setThread(DataThread *test)
 
 void EngineThread::makeData()
 {
-    qDebug() << Q_FUNC_INFO  << "dldyddn ";
     if (mList == NULL)
     {
         mList = new TestListModel;
@@ -46,10 +49,10 @@ void EngineThread::makeData()
     {
 
     }
-    //    mList->listClean();
-    for (int i = 0 ; i < 1000000 ; i++)
+    mList->listClean();
+    for (int i = 0 ; i < 100000 ; i++)
     {
-        mList->addItem(TestListElement(i , "text1" , "text2", "text3", "iconUrl"));
+        mList->addItem(TestListElement(qrand()  , "text1" , "text2", "text3", "iconUrl"));
     }
 
     qDebug() << Q_FUNC_INFO  << "post event call";
@@ -67,10 +70,11 @@ void EngineThread::run()
 {
     qDebug() << Q_FUNC_INFO  << QThread::currentThread();
     //특정 시간마다 해당 동작
-    for(;;)
-    {
-        makeData();
-    }
+    //    for(;;)
+    //    {
+    qDebug() << Q_FUNC_INFO  << QThread::currentThread();
+    makeData();
+    //    }
 
     //    일단
     //            엔진 쓰레드에서 무작위로 값을 저장해

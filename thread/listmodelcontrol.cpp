@@ -131,7 +131,7 @@ bool ListModelControl::event(QEvent *e)
     switch (e->type())
     {
     case EngineThread::GUI_UPDATE:
-        qDebug() << Q_FUNC_INFO;
+        qDebug() << Q_FUNC_INFO  << QThread::currentThread();
         qDebug() << QString ("data count !! : %1").arg(DataThread::instance()->getData()->rowCount());
         mList->resetList(DataThread::instance()->getData()->getList());
 //        mList = DataThread::instance()->getData()->getList();
