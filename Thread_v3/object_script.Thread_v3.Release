@@ -1,0 +1,14 @@
+INPUT(
+./release\main.o
+./release\engineclass.o
+./release\dataclass.o
+./release\enginedataelement.o
+./release\enginedatalistmodel.o
+./release\dataelement.o
+./release\datalistmodel.o
+./release\guilistcontrol.o
+./release\qrc_qml.o
+./release\moc_engineclass.o
+./release\moc_dataclass.o
+./release\moc_guilistcontrol.o
+);
